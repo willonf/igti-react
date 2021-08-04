@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos do mouse</title>
+    <style>
+        .selected {
+            background-color: chartreuse;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h2>Exemplo de mousedown</h2>
+<p id="a">Click aqui!</p>
+
+<button id="btn" type="button">Click here!</button>
+
+
+<div>
+    Selecione os itens:
+    <div>
+        <ul id="list">
+            <li>Desenvolvimento Javascript</li>
+            <li>Arquitetura de Aplicações Web</li>
+            <li>Banco de Dados</li>
+            <li>Introdução ao desenvolvimento web</li>
+            <li>Desenvolvimento back end</li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <p>Exemplo de mouseover/mouseout</p>
+    <p id="parag">Passe o mouse</p>
+</div>
+
+
+<div>
+    <input id="inp" value="Clique aqui" type="button">
+    <textarea id="txtArea"></textarea>
+    <input type="button" onclick="txtArea.value = ''" value="Clear">
+
+</div>
+
+</body>
+<script>
+    let p = document.getElementById('a');
+    let btn = document.querySelector('#btn');
+    let ul = document.querySelector('#list');
+    let parag = document.querySelector('#parag');
+    let inp = document.getElementById('inp');
+
+    p.addEventListener("mousedown", (event) => {
+        event.target.innerHTML = "O mouse está pressionado"
+    }, false)
+
+    p.addEventListener("mouseup", (event) => {
+        event.target.innerHTML = "O mouse não está sendo pressionado"
+    })
+
+    btn.addEventListener("click", showPosition, false);
+
+    function showPosition(event) {
+        alert(`Posição X: ${event.screenX} ||| Posicao Y: ${event.screenY}`)
+    }
+
+    ul.addEventListener('click', selectItem)
+
+    function selectItem(event) {
+        if (event.target.tagName !== "LI") {
+            return null;
+        }
+        if (event.ctrlKey || event.metaKey) {
+            toggleSelect(event.target);
+        } else {
+            singleSelect(event.target);
+        }
+    }
+
+    function toggleSelect(li) {
+        li.classList.toggle('selected')
+    }
+
+    function singleSelect(li) {
+        let selected = ul.querySelectorAll('.selected')
+
+        for (let elem of selected) {
+            elem.classList.remove('selectec')
+        }
+        li.classList.add('selected');
+    }
+
+    parag.addEventListener('mouseover', mouseOver, false)
+    parag.addEventListener('mouseout', mouseOut, false)
+
+    function mouseOver(event) {
+        event.target.innerHTML = 'O mouse está no elemento!'
+    }
+
+    function mouseOut(event) {
+        event.target.innerHTML = 'Passe o mouse'
+    }
+
+    inp.addEventListener('mousedown', log);
+    inp.addEventListener('mouseup', log);
+    inp.addEventListener('click', log);
+    inp.addEventListener('contextmenu', log);
+    inp.addEventListener('dblclick', log);
+
+    function log(event) {
+        document.getElementById('txtArea').value += event.type + '[target ' + event.which + ']\n';
+        document.getElementById('txtArea').scrollTop = document.getElementById('txtArea').scrollHeight
+    }
+
+</script>
+</html>

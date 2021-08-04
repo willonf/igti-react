@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundamentos de Eventos - Parte 2</title>
+    <style type="text/css">
+        div, p, a {
+            padding: 15px 30px;
+            display: block;
+            border: 2px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Fundamentos de Eventos - Parte 2</h1>
+
+<!--Todos os eventos estão dentro da interface Event-->
+
+<!--Tipo bubbling: o evento será propagado dos filhos para os ancestrais-->
+<div>
+    <h2>Propagação de eventos - Bubbling</h2>
+    <div onclick="alert(`Bubbling: ${this.tagName}`)">Elemento div
+        <p onclick="alert(`Bubbling: ${this.tagName}`)">Elemento p
+            <a onclick="alert(`Bubbling: ${this.tagName}`)"> Elemento a</a>
+        </p>
+    </div>
+</div>
+
+<!--Tipo capture: o evento será propagado do ancestral para os filhos-->
+<div>
+    <h2>Propagação de eventos - Capture</h2>
+    <div class="capture">Elemento div
+        <p class="capture">Elemento p
+            <a class="capture" href="#"> Elemento a</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    let elements = document.querySelectorAll(".capture");
+
+    function showTagName() {
+        alert(`Captura: ${this.tagName}`)
+    }
+
+    elements.forEach((element) => {
+        element.addEventListener('click', showTagName, false)
+    //    Obs.: Por padrão o addEventListener sempre usa bubbling. O argumento true indica que iremos usar capture
+    })
+
+</script>
+
+</body>
+</html>

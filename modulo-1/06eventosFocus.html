@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos de foco</title>
+  <style>
+    .invalid{
+      border-color: red;
+    }
+
+    #error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<h1>Eventos de foco</h1>
+<div>
+  <p>Digite seu e-mail:</p>
+</div>
+<div>
+  <input type="email" id="iptEmail">
+  <div id="error"></div>
+</div>
+</body>
+<script>
+  let ipt = document.querySelector('#iptEmail')
+
+  ipt.addEventListener('blur', funcBlur)
+  ipt.addEventListener('focus', funcFocus)
+
+
+  function funcBlur (event) {
+    if(!event.target.value.includes('@')){
+      event.target.classList.add('invalid')
+      document.getElementById('error').innerText = 'Email inválido! Digite um email válido'
+    }
+  }
+
+  function funcFocus(event) {
+    if(event.target.classList.contains('invalid')){
+      event.target.classList.remove('invalid');
+      document.getElementById('error').innerText = "";
+    }
+  }
+</script>
+</html>

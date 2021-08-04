@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UIEvent - Evento da interface de usuário</title>
+</head>
+<body onload="checkingCookies()" onunload="messageUnload()" onbeforeunload="messageBeforeUnload()">
+<h1>UIEvent - Evento da interface de usuário</h1>
+<p>Verificando se os cookies estão habilitados durante o loading da página.</p>
+<p> Redimensionou a página: <span id="qtde">0</span></p>
+<a href="https://igti.com.br">IGTI</a>
+
+<script>
+
+    const checkingCookies = () => {
+        const isCookieEnabled = navigator.cookieEnabled ? alert('Cookies habilitados!') : alert('Cookies desabilitados!');
+    }
+
+    let counter = 0;
+    const countResize = () => {
+        // document.getElementById("qtde").innerHTML = txtElement;
+        document.getElementById("qtde").innerText = (counter += 1);
+    }
+    window.addEventListener('resize', countResize);
+
+    const messageBeforeUnload = () => {
+        console.log("Até mais!");
+    }
+    const messageUnload = () => {
+        console.log('Seja bem vindo a minha página!');
+    }
+    window.addEventListener('beforeunload', messageBeforeUnload);
+    window.addEventListener('unload', messageUnload);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundamentos de Eventos - Parte 1</title>
+</head>
+<body>
+<h1>Fundamentos de Eventos - Parte 1</h1>
+<!--Usando manipulador inline-->
+<div>
+    <button id="btn1" type="button" onclick="alert('Você clicou no botão!')">Click here!</button>
+    <a id="lnk1" href="#" onclick="alert('Você clicou no link!')">Click this link!</a>
+</div>
+
+
+<!--Usando manipulador em propriedade-->
+<div>
+    <button id="btn2" type="button">Click here!</button>
+    <a id="lnk2" href="#">Click this link!</a>
+</div>
+
+<!--Usando manipulador do DOM 2-->
+<div>
+    <button id="btn3" type="button">Click here!</button>
+    <a id="lnk3" href="#">Click this link!</a>
+</div>
+
+<div>
+    <a href="./02eventos2.html">Fundamentos de Eventos - Parte 2</a>
+</div>
+
+<div>
+    <a href="03eventos3.html">UIEvent - Evento da interface de usuário</a>
+</div>
+
+<div>
+    <a href="04eventosMouse.html">Eventos do mouse</a>
+</div>
+
+<div>
+    <a href="05eventosTeclado.html">Eventos do teclado</a>
+</div>
+<div>
+    <a href="06eventosFocus.html">Eventos de foco</a>
+</div>
+
+
+</body>
+</html>
+
+<script>
+
+    const btn2 = document.getElementById("btn2")
+    const lnk2 = document.getElementById("lnk2")
+
+    const btn3 = document.getElementById("btn3")
+    const lnk3 = document.getElementById("lnk3")
+
+    btn2.onclick = () => {
+        window.alert("Você clicou no botão 2!")
+    }
+
+    lnk2.onclick = () => {
+        window.alert("Você clicou no link 2!")
+    }
+
+    btn3.addEventListener('click', alertBtn);
+    lnk3.addEventListener('click', alertLnk);
+
+    function alertBtn(event) {
+        let aEvent = event? event : window.event;
+        window.alert(`Posição x do mouse: ${event.screenX}`)
+    }
+
+    function alertLnk() {
+        window.alert("Você clicou no link 3!")
+    }
+</script>

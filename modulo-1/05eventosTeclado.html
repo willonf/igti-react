@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos do teclado</title>
+</head>
+<body>
+<h1>Exemplo de eventos do teclado</h1>
+
+<p>Texto
+    <input type="text" id="txt" value=""></p>
+
+<h2>Combinando 2 teclas</h2>
+<div>
+    <p>Pressione "d" e "a" juntos</p>
+</div>
+
+</body>
+<script>
+    let inpTxt = document.querySelector('#txt')
+    let parag = document.querySelector('div p')
+
+    inpTxt.addEventListener('keydown', fnKeyDown, false)
+    inpTxt.addEventListener('keyup', fnKeyUp, false)
+
+    function fnKeyDown(event) {
+        event.target.style.background = "blue"
+    }
+
+    function fnKeyUp(event) {
+        event.target.style.background = "white"
+    }
+
+    function runDoubleKeys(func, ...codes) {
+        let pressed = new Set();
+
+        document.addEventListener('keydown', (event) => {
+            pressed.add(event.code)
+
+            console.log(event.code)
+
+            for (let code of codes) {
+                if (!pressed.has(code)) {
+                    return;
+                }
+                pressed.clear();
+                func();
+            }
+        })
+
+        document.addEventListener('keyup', (event) => {
+            pressed.delete(event.code)
+        })
+    }
+
+    runDoubleKeys(() => alert("Combinação de duas teclas"),
+        "KeyA", "KeyD")
+</script>
+</html>
